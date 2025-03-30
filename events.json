@@ -2,33 +2,28 @@
   "events": [
     {
       "condition": "pressCount === 1",
-      "message": "FIRST PRESS DETECTED",
+      "message": "SYSTEM ALERT: First press detected",
       "action": "document.body.style.backgroundColor = '#FFEEEE'"
     },
     {
       "condition": "pressCount === 2",
-      "message": "SYSTEM PROBING",
-      "action": "document.getElementById('button').style.border = '8px double #FF0000'"
+      "message": "WARNING: Unauthorized activity",
+      "action": "document.getElementById('button').style.border = '8px double red'"
     },
     {
       "condition": "pressCount === 3",
-      "message": "WARNING SIGNS",
-      "action": "document.getElementById('message').style.textDecoration = 'blink'"
+      "message": "CRITICAL: System overload",
+      "action": "document.getElementById('message').style.animation = 'blink 0.5s infinite'"
     },
     {
       "condition": "pressCount === 5",
-      "message": "MINOR GLITCHES",
-      "action": "document.getElementById('button').style.transform = 'rotate(5deg)'"
-    },
-    {
-      "condition": "pressCount % 5 === 0 && pressCount <= 50",
-      "message": "PHASE ${Math.floor(pressCount/5)} INITIATED",
-      "action": "document.getElementById('button').style.boxShadow = '0 0 ${pressCount}px rgba(255,0,0,0.5)'"
+      "message": "EMERGENCY: Containment breach",
+      "action": "document.body.style.backgroundImage = 'linear-gradient(red, yellow)'"
     },
     {
       "condition": "pressCount === 10",
-      "message": "RELEASE THE KRAKEN!",
-      "action": "document.body.classList.add('screen-shake'); setTimeout(() => document.body.classList.remove('screen-shake'), 1000); document.getElementById('button').style.transform = 'scale(1.5)'"
+      "message": "CATASTROPHIC FAILURE IMMINENT",
+      "action": "document.body.classList.add('screen-shake'); setTimeout(() => document.body.classList.remove('screen-shake'), 1000)"
     }
   ]
 }
