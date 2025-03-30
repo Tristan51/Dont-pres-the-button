@@ -1,57 +1,81 @@
-<style>
-    /* ... (keep existing styles) ... */
-    
-    /* New animation styles */
-    #button {
-        /* ... (keep existing button styles) ... */
-        position: relative;
-        overflow: hidden;
-    }
-    
-    #button::after {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 10px;
-        height: 10px;
-        background: rgba(255, 255, 255, 0.5);
-        opacity: 0;
-        border-radius: 100%;
-        transform: translate(-50%, -50%) scale(1);
-        transition: transform 0.3s, opacity 0.3s;
-    }
-    
-    #button:active::after {
-        transform: translate(-50%, -50%) scale(20);
-        opacity: 1;
-        transition: transform 0.3s, opacity 0s;
-    }
-    
-    @keyframes shake {
-        0% { transform: translate(0); }
-        20% { transform: translate(-5px, 5px); }
-        40% { transform: translate(5px, -5px); }
-        60% { transform: translate(-5px, 5px); }
-        80% { transform: translate(5px, -5px); }
-        100% { transform: translate(0); }
-    }
-    
-    .shake {
-        animation: shake 0.4s;
-    }
-</style>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+    <title>WARNING: DO NOT PRESS THE BUTTON</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <style>
+        /* ... (keep all previous 90s styles) ... */
+    </style>
+</head>
+<body bgcolor="#FFFFFF" text="#000000">
+    <div id="container">
+        <div class="marquee">
+            <blink>⚠️ WARNING: DO NOT PRESS THE BUTTON ⚠️</blink>
+        </div>
+        <hr>
+        <div class="counter" id="counter">PRESS COUNT: 0</div>
+        <div id="button" title="SERIOUSLY, DON'T PRESS IT"></div>
+        <div class="message" id="message">SYSTEM STATUS: STABLE</div>
+        <hr>
+        <div class="footer">
+            <p>Best viewed with Netscape Navigator 3.0<br>
+            © 1997-1999 All Rights Reserved</p>
+        </div>
+    </div>
 
-<script>
-    // ... (keep existing variable declarations) ...
-    
-    button.addEventListener('click', () => {
-        // Add click animation
-        button.classList.add('shake');
-        setTimeout(() => button.classList.remove('shake'), 400);
-        
-        // Add ripple effect (handled by CSS :active pseudo-class)
-        
-        // ... (rest of your existing click handler code) ...
-    });
-</script>
+    <script language="JavaScript">
+    <!--
+        var pressCount = 0;
+        var button = document.getElementById('button');
+        var counter = document.getElementById('counter');
+        var message = document.getElementById('message');
+        var events = [];
+
+        // Load JSON events (90s-style XMLHttpRequest for authenticity)
+        function loadEvents() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'events.json', true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    try {
+                        events = JSON.parse(xhr.responseText).events;
+                        message.innerHTML = "SYSTEM STATUS: READY";
+                    } catch(e) {
+                        message.innerHTML = "ERROR LOADING EVENTS";
+                        // Fallback to default events
+                        events = [
+                            { condition: "pressCount >= 1", message: "FIRST PRESS DETECTED", action: "document.bgColor='#FFFFCC'" },
+                            { condition: "pressCount >= 3", message: "MULTIPLE PRESSES!", action: "alert('STOP PRESSING!')" }
+                        ];
+                    }
+                }
+            };
+            xhr.send();
+        }
+
+        // Initialize
+        loadEvents();
+
+        button.onclick = function() {
+            pressCount++;
+            counter.innerHTML = "PRESS COUNT: " + pressCount;
+            
+            // Process JSON events
+            for (var i = 0; i < events.length; i++) {
+                try {
+                    if (eval(events[i].condition)) {
+                        message.innerHTML = "SYSTEM STATUS: " + events[i].message;
+                        eval(events[i].action);
+                    }
+                } catch(e) {
+                    console.error("Event error:", e);
+                }
+            }
+            
+            // Classic 90s effect
+            document.body.style.backgroundImage = "url('data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" + pressCount + "')";
+        }
+    //-->
+    </script>
+</body>
+</html>
