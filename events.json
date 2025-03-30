@@ -1,41 +1,156 @@
 {
   "events": [
+    // Tier 1: Basic effects (every few clicks)
+    {
+      "condition": "pressCount === 1",
+      "message": "FIRST PRESS DETECTED",
+      "action": [
+        "document.body.style.backgroundColor = '#FFEEEE'"
+      ]
+    },
+    {
+      "condition": "pressCount === 2",
+      "message": "SYSTEM PROBING",
+      "action": [
+        "document.getElementById('button').style.border = '8px double #FF0000'"
+      ]
+    },
+    {
+      "condition": "pressCount === 3",
+      "message": "WARNING SIGNS",
+      "action": [
+        "document.getElementById('message').style.textDecoration = 'blink'"
+      ]
+    },
+    {
+      "condition": "pressCount === 4",
+      "message": "UNAUTHORIZED ACCESS",
+      "action": [
+        "document.body.style.backgroundImage = 'url(data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==)'"
+      ]
+    },
+    {
+      "condition": "pressCount === 5",
+      "message": "MINOR GLITCHES",
+      "action": [
+        "document.getElementById('button').style.transform = 'rotate(5deg)'"
+      ]
+    },
+
+    // Tier 2: Every 5 clicks
+    {
+      "condition": "pressCount % 5 === 0 && pressCount <= 50",
+      "message": "PHASE ${Math.floor(pressCount/5)} INITIATED",
+      "action": [
+        "document.getElementById('button').style.boxShadow = '0 0 ${pressCount}px rgba(255,0,0,0.5)'",
+        "new Audio('https://assets.mixkit.co/sfx/preview/mixkit-arcade-game-jump-coin-216.mp3').play()"
+      ]
+    },
+
+    // Tier 3: Every 10 clicks (major events)
     {
       "condition": "pressCount === 10",
       "message": "RELEASE THE KRAKEN!",
       "action": [
-        "document.body.classList.add('screen-shake', 'color-cycle')",
-        "document.getElementById('button').style.transform = 'scale(2)'"
+        "document.body.classList.add('screen-shake')",
+        "setTimeout(() => document.body.classList.remove('screen-shake'), 1000)",
+        "document.getElementById('button').style.transform = 'scale(1.5)'"
       ]
     },
     {
       "condition": "pressCount === 20",
       "message": "MATRIX BREACHED",
       "action": [
-        "document.body.style.backgroundImage = 'repeating-linear-gradient(45deg, #0f0, #0f0 10px, #000 10px, #000 20px)'",
-        "document.getElementById('message').classList.add('matrix-fall')"
+        "document.body.style.background = 'repeating-linear-gradient(45deg, #0f0, #0f0 10px, #000 10px, #000 20px)'",
+        "document.getElementById('message').style.animation = 'matrix-fall 5s infinite'"
       ]
     },
     {
       "condition": "pressCount === 30",
-      "message": "TIME VORTEX ACTIVATED",
+      "message": "TIME VORTEX",
       "action": [
         "document.body.style.animation = 'vortex 2s infinite'",
         "document.getElementById('button').style.animation = 'hyperspace 1s infinite'"
       ]
     },
     {
-      "condition": "pressCount % 10 === 0 && pressCount > 0",
-      "message": "MILESTONE REACHED: ${pressCount}",
+      "condition": "pressCount === 40",
+      "message": "QUANTUM ENTANGLEMENT",
       "action": [
-        "document.body.classList.toggle('alt-dimension')",
-        "new Audio('https://assets.mixkit.co/sfx/preview/mixkit-arcade-game-jump-coin-216.mp3').play()"
+        "document.getElementById('button').style.display = 'none'",
+        "setTimeout(() => document.getElementById('button').style.display = 'block', 500)"
       ]
     },
     {
-      "condition": "pressCount % 5 === 0",
+      "condition": "pressCount === 50",
+      "message": "SINGULARITY REACHED",
       "action": [
-        "document.getElementById('button').style.boxShadow = '0 0 ${pressCount}px rgba(255,0,0,0.5)'"
+        "document.body.style.transform = 'scale(0.5)'",
+        "document.body.style.filter = 'hue-rotate(180deg)'"
+      ]
+    },
+
+    // Tier 4: Every 25 clicks (game-changers)
+    {
+      "condition": "pressCount === 25",
+      "message": "DIMENSIONAL TEAR",
+      "action": [
+        "document.body.style.perspective = '1000px'",
+        "document.getElementById('container').style.transform = 'rotateX(45deg)'"
+      ]
+    },
+    {
+      "condition": "pressCount === 75",
+      "message": "REALITY CRASH",
+      "action": [
+        "setInterval(() => { document.body.style.filter = `hue-rotate(${Math.random()*360}deg)` }, 100)",
+        "document.getElementById('button').style.position = 'fixed'"
+      ]
+    },
+
+    // Tier 5: Random chaos (10% chance)
+    {
+      "condition": "Math.random() < 0.1",
+      "message": "RANDOM ANOMALY DETECTED",
+      "action": [
+        "document.getElementById('button').style.backgroundColor = `hsl(${Math.random()*360}, 100%, 50%)`",
+        "document.body.style.cursor = `url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\"><text x=\"0\" y=\"14\" font-family=\"monospace\" font-size=\"16\" fill=\"red\">?</text></svg>'), auto`"
+      ]
+    },
+
+    // Tier 6: Progressive effects
+    {
+      "condition": "pressCount > 100",
+      "message": "BEYOND LIMITS (${pressCount})",
+      "action": [
+        "document.body.style.background = `repeating-radial-gradient(circle, hsl(${pressCount % 360}, 100%, 50%), black`",
+        "document.getElementById('button').style.borderRadius = `${pressCount % 100}px`"
+      ]
+    },
+    {
+      "condition": "pressCount > 150",
+      "action": [
+        "document.body.style.fontFamily = 'Wingdings'",
+        "document.getElementById('button').innerHTML = '✖☎☜'"
+      ]
+    },
+
+    // ... (Add 80+ more events following similar patterns)
+    // Example additional events:
+    {
+      "condition": "pressCount === 66",
+      "message": "DEVIL'S PLAYGROUND",
+      "action": [
+        "document.body.style.filter = 'invert(1)'",
+        "document.getElementById('button').style.transform = 'rotate(666deg)'"
+      ]
+    },
+    {
+      "condition": "pressCount === 100",
+      "message": "FINAL BOSS ACTIVATED",
+      "action": [
+        "document.body.innerHTML = '<h1 style=\"color:red;font-size:5em\">YOU WIN...?</h1>'",
+        "new Audio('https://assets.mixkit.co/sfx/preview/mixkit-game-level-completed-2059.mp3').play()"
       ]
     }
   ]
