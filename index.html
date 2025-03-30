@@ -1,117 +1,57 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>DON'T PRESS THE BUTTON</title>
-    <style>
-        body {
-            background: #ffffff;
-            color: #006400;
-            font-family: monospace;
-            text-align: center;
-            margin: 0;
-            padding: 20px;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: 0.3s;
-        }
+<style>
+    /* ... (keep existing styles) ... */
+    
+    /* New animation styles */
+    #button {
+        /* ... (keep existing button styles) ... */
+        position: relative;
+        overflow: hidden;
+    }
+    
+    #button::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 10px;
+        height: 10px;
+        background: rgba(255, 255, 255, 0.5);
+        opacity: 0;
+        border-radius: 100%;
+        transform: translate(-50%, -50%) scale(1);
+        transition: transform 0.3s, opacity 0.3s;
+    }
+    
+    #button:active::after {
+        transform: translate(-50%, -50%) scale(20);
+        opacity: 1;
+        transition: transform 0.3s, opacity 0s;
+    }
+    
+    @keyframes shake {
+        0% { transform: translate(0); }
+        20% { transform: translate(-5px, 5px); }
+        40% { transform: translate(5px, -5px); }
+        60% { transform: translate(-5px, 5px); }
+        80% { transform: translate(5px, -5px); }
+        100% { transform: translate(0); }
+    }
+    
+    .shake {
+        animation: shake 0.4s;
+    }
+</style>
 
-        #container {
-            border: 4px solid #8b0000;
-            padding: 30px;
-            background: #f0f0f0;
-            max-width: 500px;
-            width: 90%;
-        }
-
-        #button {
-            width: 200px;
-            height: 200px;
-            background: #ff0000 !important; /* Forces red color */
-            margin: 20px auto;
-            cursor: pointer;
-            border: 10px solid #8b0000;
-            box-shadow: 5px 5px 0px #8b0000;
-            transition: 0.2s;
-            display: block;
-        }
-
-        @keyframes wonky {
-            0% { transform: skew(0deg, 0deg); }
-            50% { transform: skew(10deg, 10deg); }
-            100% { transform: skew(-10deg, -10deg); }
-        }
-
-        #counter {
-            font-size: 18px;
-            margin: 15px;
-            color: #8b0000;
-        }
-
-        #message {
-            font-size: 14px;
-            color: #8b0000;
-            min-height: 30px;
-            margin: 15px;
-            text-transform: uppercase;
-            font-weight: bold;
-        }
-    </style>
-</head>
-<body>
-    <div id="container">
-        <h1>🚨 DO NOT PRESS 🚨</h1>
-        <div id="counter">PRESS COUNT: 0</div>
-        <div id="button"></div>
-        <div id="message">SYSTEM STABLE</div>
-    </div>
-
-    <script>
-        let pressCount = 0;
-        const button = document.getElementById('button');
-        const counter = document.getElementById('counter');
-        const message = document.getElementById('message');
-        let events = [];
-
-        // Load events from JSON
-        fetch('events.json')
-            .then(r => r.json())
-            .then(data => events = data.events)
-            .catch(console.error);
-
-        // Beep sound
-        function beep() {
-            const ctx = new AudioContext();
-            const osc = ctx.createOscillator();
-            osc.type = 'square';
-            osc.frequency.value = 500 + (pressCount * 20);
-            osc.connect(ctx.destination);
-            osc.start();
-            osc.stop(ctx.currentTime + 0.1);
-        }
-
-        button.addEventListener('click', () => {
-            pressCount++;
-            counter.textContent = `PRESS COUNT: ${pressCount}`;
-            beep();
-
-            // Reset button styles (keeps it red)
-            button.style.transform = '';
-            button.style.animation = '';
-
-            // Process all events
-            events.forEach(event => {
-                try {
-                    if (eval(event.condition)) {
-                        message.textContent = event.message;
-                        eval(event.action);
-                    }
-                } catch(e) {
-                    console.error('Error in event:', e);
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+<script>
+    // ... (keep existing variable declarations) ...
+    
+    button.addEventListener('click', () => {
+        // Add click animation
+        button.classList.add('shake');
+        setTimeout(() => button.classList.remove('shake'), 400);
+        
+        // Add ripple effect (handled by CSS :active pseudo-class)
+        
+        // ... (rest of your existing click handler code) ...
+    });
+</script>
