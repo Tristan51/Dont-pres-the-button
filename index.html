@@ -4,76 +4,97 @@
     <title>WARNING: DO NOT PRESS THE BUTTON</title>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
     <style>
-        /* ... (keep all previous 90s styles) ... */
+        body {
+            background-color: #FFFFFF;
+            margin: 0;
+            padding: 0;
+            font-family: "Times New Roman", Times, serif;
+            color: #000000;
+            text-align: center;
+        }
+        
+        #container {
+            width: 600px;
+            margin: 20px auto;
+            border: 3px double #000000;
+            padding: 10px;
+            background-color: #F0F0F0;
+        }
+        
+        #button {
+            width: 150px;
+            height: 150px;
+            background-color: #FF0000 !important;
+            margin: 20px auto;
+            border: 4px outset #880000 !important;
+            cursor: pointer;
+            display: block;
+            transition: all 0.1s ease;
+            box-shadow: 0 5px 0 #CC0000;
+            position: relative;
+        }
+        
+        #button:active {
+            transform: translateY(5px);
+            box-shadow: 0 2px 0 #CC0000;
+            border-style: inset !important;
+        }
+        
+        .counter {
+            font-family: "Courier New", Courier, monospace;
+            font-size: 14px;
+            color: #000000;
+            background-color: #DDDDDD;
+            padding: 2px 5px;
+            border: 1px solid #999999;
+        }
     </style>
 </head>
 <body bgcolor="#FFFFFF" text="#000000">
     <div id="container">
-        <div class="marquee">
-            <blink>⚠️ WARNING: DO NOT PRESS THE BUTTON ⚠️</blink>
-        </div>
-        <hr>
-        <div class="counter" id="counter">PRESS COUNT: 0</div>
-        <div id="button" title="SERIOUSLY, DON'T PRESS IT"></div>
-        <div class="message" id="message">SYSTEM STATUS: STABLE</div>
-        <hr>
-        <div class="footer">
-            <p>Best viewed with Netscape Navigator 3.0<br>
-            © 1997-1999 All Rights Reserved</p>
-        </div>
+        <h1><blink>⚠️ DANGER ⚠️</blink></h1>
+        <div id="counter">PRESSES: 0</div>
+        <div id="button"></div>
+        <div id="message">STATUS: NOMINAL</div>
     </div>
 
     <script language="JavaScript">
     <!--
         var pressCount = 0;
-        var button = document.getElementById('button');
-        var counter = document.getElementById('counter');
-        var message = document.getElementById('message');
         var events = [];
-
-        // Load JSON events (90s-style XMLHttpRequest for authenticity)
-        function loadEvents() {
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', 'events.json', true);
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4 && xhr.status === 200) {
+        
+        // Load JSON events
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'events.json', true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
                     try {
                         events = JSON.parse(xhr.responseText).events;
-                        message.innerHTML = "SYSTEM STATUS: READY";
+                        document.getElementById('message').innerHTML = "STATUS: READY";
                     } catch(e) {
-                        message.innerHTML = "ERROR LOADING EVENTS";
-                        // Fallback to default events
-                        events = [
-                            { condition: "pressCount >= 1", message: "FIRST PRESS DETECTED", action: "document.bgColor='#FFFFCC'" },
-                            { condition: "pressCount >= 3", message: "MULTIPLE PRESSES!", action: "alert('STOP PRESSING!')" }
-                        ];
+                        document.getElementById('message').innerHTML = "STATUS: CONFIG ERROR";
                     }
                 }
-            };
-            xhr.send();
-        }
+            }
+        };
+        xhr.send();
 
-        // Initialize
-        loadEvents();
-
-        button.onclick = function() {
+        document.getElementById('button').onclick = function() {
             pressCount++;
-            counter.innerHTML = "PRESS COUNT: " + pressCount;
+            document.getElementById('counter').innerHTML = "PRESSES: " + pressCount;
             
             // Process JSON events
             for (var i = 0; i < events.length; i++) {
                 try {
                     if (eval(events[i].condition)) {
-                        message.innerHTML = "SYSTEM STATUS: " + events[i].message;
+                        document.getElementById('message').innerHTML = events[i].message;
                         eval(events[i].action);
                     }
                 } catch(e) {
-                    console.error("Event error:", e);
+                    console.log("Event error:", e);
                 }
             }
-            
-            // Classic 90s effect
-            document.body.style.backgroundImage = "url('data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" + pressCount + "')";
         }
     //-->
     </script>
