@@ -1,19 +1,19 @@
 {
   "events": [
     {
-      "message": "SYSTEM MALFUNCTION",
       "condition": "pressCount >= 1",
-      "action": "document.body.style.backgroundColor = '#ffe0e0'"
+      "message": "BUTTON PRESS DETECTED",
+      "action": "document.bgColor='#FFEEEE'"
     },
     {
-      "message": "CRITICAL OVERHEAT",
+      "condition": "pressCount >= 3",
+      "message": "MULTIPLE VIOLATIONS",
+      "action": "button.style.border='4px inset #FF0000'"
+    },
+    {
       "condition": "pressCount >= 5",
-      "action": "button.style.transform = 'rotate(5deg)'"
-    },
-    {
-      "message": "CORE BREACH IMMINENT",
-      "condition": "pressCount >= 10",
-      "action": "button.style.transform = 'skew(20deg, 20deg)'; button.style.animation = 'wonky 0.5s infinite'"
+      "message": "CRITICAL FAILURE",
+      "action": "document.body.style.backgroundImage='url(data:image/gif;base64,R0lGODlhEAAQAMQAAO7u7t3d3czMzLm5uaqqqpiYmGZmZjMzM0xMTGZmZpmZmWZmZszMzJmZmczMzO7u7t3d3e7u7t3d3QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAABAALAAAAAAQABAAAAVqICSOZGmeaKqubOu+cCzPdG3feK7vfO//wKBwSCwaj8ikcslsOp/QqHRKrVqv2Kx2y+16v+CweEwum8/otHrNbrvf8Lh8Tq/b7/i8fs/v+/+AgYKDhIWGh4iJiouMjY6PkJGSk5SVlpeYmZqbnJ0hADs=)'"
     }
   ]
 }
