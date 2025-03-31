@@ -2,191 +2,106 @@
   "events": [
     {
       "condition": "pressCount === 1",
-      "message": "FIRST BLOOD",
+      "message": "FIRST PRESS! SYSTEM AWAKENING",
       "action": "document.body.style.backgroundColor='#FFEEEE'"
     },
     {
       "condition": "pressCount === 2",
-      "message": "SYSTEM PROBING",
-      "action": "document.getElementById('button').style.border='8px double #FF0000'"
+      "message": "SECOND PRESS! PROTOCOLS ENGAGED",
+      "action": "document.getElementById('button').style.border='4px double red'"
     },
     {
       "condition": "pressCount === 3",
-      "message": "WARNING SIGNS",
+      "message": "THIRD PRESS! ENERGY BUILDING",
       "action": "document.getElementById('message').style.textDecoration='blink'"
     },
     {
       "condition": "pressCount === 4",
-      "message": "UNAUTHORIZED ACCESS",
-      "action": "document.body.style.backgroundImage='url(data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==)'"
+      "message": "FOURTH PRESS! SYSTEMS STRAINING",
+      "action": "document.getElementById('counter').style.fontWeight='bold'"
     },
     {
       "condition": "pressCount === 5",
-      "message": "MINOR GLITCHES",
-      "action": "document.getElementById('button').style.transform='rotate(5deg)'"
-    },
-    {
-      "condition": "pressCount === 6",
-      "message": "FEEDBACK LOOP",
+      "message": "FIFTH PRESS! CONTAINMENT WEAKENS",
       "action": "document.getElementById('button').style.boxShadow='0 0 10px red'"
     },
     {
-      "condition": "pressCount === 7",
-      "message": "CORE TEMP RISING",
-      "action": "document.getElementById('message').style.color='#FF3300'"
-    },
-    {
-      "condition": "pressCount === 8",
-      "message": "DATA CORRUPTION",
-      "action": "document.getElementById('counter').style.transform='skewX(10deg)'"
-    },
-    {
-      "condition": "pressCount === 9",
-      "message": "CRITICAL MASS",
-      "action": "document.body.style.filter='brightness(1.2)'"
-    },
-    {
       "condition": "pressCount === 10",
-      "message": "RELEASE THE KRAKEN!",
-      "action": "document.body.classList.add('screen-shake');setTimeout(()=>document.body.classList.remove('screen-shake'),1000);document.getElementById('button').style.transform='scale(1.5)'"
-    },
-    {
-      "condition": "pressCount === 11",
-      "message": "AFTERSHOCKS",
-      "action": "document.getElementById('button').style.animation='pulse 0.5s infinite'"
-    },
-    {
-      "condition": "pressCount === 12",
-      "message": "RESIDUAL ENERGY",
-      "action": "document.body.style.backgroundColor='#000';document.getElementById('button').style.backgroundColor='#FF00FF'"
-    },
-    {
-      "condition": "pressCount === 13",
-      "message": "UNKNOWN FORCE",
-      "action": "document.getElementById('message').style.fontFamily='Courier New'"
-    },
-    {
-      "condition": "pressCount === 14",
-      "message": "DIMENSIONAL TEAR",
-      "action": "document.getElementById('container').style.transform='rotate(5deg)'"
+      "message": "TENTH PRESS! RELEASE THE KRAKEN!",
+      "action": "document.body.classList.add('screen-shake');setTimeout(()=>document.body.classList.remove('screen-shake'),1000)"
     },
     {
       "condition": "pressCount === 15",
-      "message": "QUANTUM FLUX",
-      "action": "document.body.style.background='repeating-linear-gradient(45deg,black,black 10px,#0f0 10px,#0f0 20px)'"
-    },
-    {
-      "condition": "pressCount === 16",
-      "message": "TIME DILATION",
-      "action": "document.getElementById('button').style.transition='all 0.5s'"
-    },
-    {
-      "condition": "pressCount === 17",
-      "message": "MATTER DISRUPTION",
-      "action": "document.body.style.color='#0F0'"
-    },
-    {
-      "condition": "pressCount === 18",
-      "message": "ENTROPY SPIKE",
-      "action": "document.getElementById('button').style.borderRadius='20px'"
-    },
-    {
-      "condition": "pressCount === 19",
-      "message": "SYSTEM OVERRIDE",
-      "action": "document.getElementById('counter').style.fontSize='24px'"
+      "message": "PHASE 2 ACTIVATED!",
+      "action": "document.body.style.background='linear-gradient(black, #330000)'"
     },
     {
       "condition": "pressCount === 20",
-      "message": "MATRIX BREACHED",
-      "action": "document.body.style.animation='vortex 2s infinite';document.getElementById('button').style.animation='hyperspace 1s infinite'"
+      "message": "MATRIX BREACHED! (${pressCount})",
+      "action": "document.getElementById('button').style.transform='rotate(180deg)'"
     },
     {
       "condition": "pressCount === 25",
-      "message": "REALITY CRUMBLE",
-      "action": "document.body.style.perspective='1000px';document.getElementById('container').style.transform='rotateX(30deg)'"
+      "message": "QUANTUM FLUCTUATIONS DETECTED",
+      "action": "document.body.style.animation='vortex 2s infinite'"
     },
     {
       "condition": "pressCount === 30",
-      "message": "TIME VORTEX",
-      "action": "setInterval(()=>{document.body.style.filter=`hue-rotate(${Math.random()*360}deg)`},100)"
-    },
-    {
-      "condition": "pressCount === 35",
-      "message": "QUANTUM ENTANGLEMENT",
-      "action": "document.getElementById('button').style.display='none';setTimeout(()=>document.getElementById('button').style.display='block',300)"
+      "message": "TIME PARADOX IMMINENT",
+      "action": "document.getElementById('button').style.animation='hyperspace 1s infinite'"
     },
     {
       "condition": "pressCount === 40",
-      "message": "SINGULARITY FORMING",
-      "action": "document.body.style.transform='scale(0.9)';document.getElementById('button').style.transform='rotate(360deg) scale(2)'"
-    },
-    {
-      "condition": "pressCount === 45",
-      "message": "DARK MATTER INTRUSION",
-      "action": "document.body.style.background='radial-gradient(circle, #000, #330033)'"
+      "message": "DIMENSIONAL TEAR DETECTED",
+      "action": "document.body.style.filter='hue-rotate(180deg)'"
     },
     {
       "condition": "pressCount === 50",
-      "message": "FINAL COUNTDOWN",
-      "action": "const el=document.createElement('div');el.innerHTML='<marquee style=\"color:red;font-size:24px\">SELF-DESTRUCT INITIATED</marquee>';document.body.prepend(el)"
-    },
-    {
-      "condition": "pressCount === 55",
-      "message": "CHAOS THEORY PROVEN",
-      "action": "document.getElementById('button').style.mixBlendMode='difference'"
+      "message": "SINGULARITY FORMING",
+      "action": "document.body.style.transform='scale(0.9)'"
     },
     {
       "condition": "pressCount === 60",
-      "message": "PARADOX DETECTED",
-      "action": "document.body.style.fontFamily='Wingdings'"
-    },
-    {
-      "condition": "pressCount === 66",
-      "message": "DEVIL'S PLAYGROUND",
-      "action": "document.body.style.filter='invert(1)';document.getElementById('button').style.transform='rotate(666deg)'"
+      "message": "REALITY UNRAVELING",
+      "action": "document.getElementById('button').style.display='none';setTimeout(()=>document.getElementById('button').style.display='block',500)"
     },
     {
       "condition": "pressCount === 70",
-      "message": "NULL REFERENCE",
-      "action": "document.body.style.pointerEvents='none';setTimeout(()=>document.body.style.pointerEvents='auto',1000)"
-    },
-    {
-      "condition": "pressCount === 75",
-      "message": "REALITY CRASH",
-      "action": "document.body.style.overflow='hidden';document.body.innerHTML='<h1 style=\"color:red;text-align:center;margin-top:50vh\">SYSTEM FAILURE</h1>'"
+      "message": "COSMIC HORROR AWAKENS",
+      "action": "document.body.style.backgroundImage='repeating-linear-gradient(45deg, black, black 10px, #f00 10px, #f00 20px)'"
     },
     {
       "condition": "pressCount === 80",
-      "message": "BEYOND EVENT HORIZON",
-      "action": "document.body.style.background='#000';document.getElementById('container').style.border='1px solid #f00'"
+      "message": "FINAL WARNING",
+      "action": "document.body.style.color='white';document.body.style.backgroundColor='black'"
     },
     {
       "condition": "pressCount === 90",
-      "message": "COSMIC RETRIBUTION",
-      "action": "document.body.style.transform='scale(0.5)';document.body.style.filter='blur(2px)'"
+      "message": "POINT OF NO RETURN",
+      "action": "document.getElementById('button').style.borderRadius='50%'"
     },
     {
       "condition": "pressCount === 100",
-      "message": "FINAL BOSS ACTIVATED",
-      "action": "document.body.innerHTML='<div style=\"position:fixed;top:0;left:0;width:100vw;height:100vh;background:#000;color:red;display:flex;justify-content:center;align-items:center;font-size:10vw\">GAME OVER</div>'"
+      "message": "SYSTEM DESTROYED",
+      "action": "document.body.innerHTML='<h1 style=\"color:red;text-align:center;margin-top:40vh;font-size:3em\">GAME OVER</h1>'"
+    },
+    {
+      "condition": "pressCount % 10 === 0",
+      "message": "MILESTONE: ${pressCount} PRESSES!",
+      "action": "new Audio('https://assets.mixkit.co/sfx/preview/mixkit-arcade-game-jump-coin-216.mp3').play()"
     },
     {
       "condition": "pressCount % 5 === 0",
-      "message": "PHASE ${Math.floor(pressCount/5)} COMPLETE",
       "action": "document.getElementById('button').style.boxShadow='0 0 ${pressCount/2}px rgba(255,0,0,0.8)'"
     },
     {
       "condition": "pressCount % 7 === 0",
-      "action": "document.body.style.backgroundColor=`hsl(${pressCount*3 % 360}, 50%, 50%)`"
+      "action": "document.body.style.backgroundColor='hsl(${pressCount*3 % 360}, 50%, 50%)'"
     },
     {
-      "condition": "pressCount % 10 === 0",
-      "action": "new Audio('https://assets.mixkit.co/sfx/preview/mixkit-arcade-game-jump-coin-216.mp3').play()"
-    },
-    {
-      "condition": "Math.random() < 0.1",
-      "message": "RANDOM ANOMALY",
-      "action": "document.getElementById('button').style.transform=`rotate(${Math.random()*360}deg)`"
+      "condition": "Math.random() < 0.2",
+      "message": "RANDOM ANOMALY DETECTED!",
+      "action": "document.getElementById('button').style.transform='rotate(${Math.random()*360}deg)'"
     }
   ]
 }
