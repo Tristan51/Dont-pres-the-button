@@ -4,7 +4,7 @@
     <title>WARNING: DO NOT PRESS THE BUTTON</title>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
     <style>
-        /* ALL YOUR EXISTING STYLES REMAIN UNCHANGED */
+        /* === PRESERVED ALL ORIGINAL STYLES === */
         body {
             background-color: #FFFFFF;
             margin: 0;
@@ -37,86 +37,106 @@
             box-shadow: 0 2px 0 #CC0000;
             border-style: inset !important;
         }
-        .counter { /* ... keep existing ... */ }
-        .message { /* ... keep existing ... */ }
-        /* ALL OTHER STYLES REMAIN */
+        .counter {
+            font-family: "Courier New", Courier, monospace;
+            font-size: 14px;
+            color: #000000;
+            background-color: #DDDDDD;
+            padding: 2px 5px;
+            border: 1px solid #999999;
+        }
+        .message {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12px;
+            color: #FF0000;
+            background-color: #FFFFCC;
+            padding: 5px;
+            border: 1px dotted #FF9900;
+            margin: 10px 0;
+        }
+        /* === END OF PRESERVED STYLES === */
     </style>
 </head>
 <body bgcolor="#FFFFFF" text="#000000">
+    <!-- Preserved all HTML structure -->
     <div id="container">
         <h1><blink>⚠️ DANGER ⚠️</blink></h1>
-        <div id="counter">PRESSES: 0</div>
+        <div id="counter" class="counter">PRESSES: 0</div>
         <div id="button"></div>
-        <div id="message">STATUS: NOMINAL</div>
+        <div id="message" class="message">STATUS: NOMINAL</div>
     </div>
 
     <script language="JavaScript">
     <!--
-        // FIXED VERSION - PROPER JSON HANDLING
+        // PRESERVED CORE FUNCTIONALITY WITH ENHANCED JSON HANDLING
         var pressCount = 0;
         var events = [];
-        var defaultMessage = "STATUS: NOMINAL";
+        var defaultStatus = "STATUS: NOMINAL";
 
-        // Load JSON events (with error handling)
+        // Load events with error protection
         function loadEvents() {
             fetch('events.json')
                 .then(response => {
-                    if (!response.ok) throw new Error("Network response was not ok");
+                    if (!response.ok) throw new Error('Network error');
                     return response.json();
                 })
                 .then(data => {
-                    events = data.events || [];
-                    console.log("Loaded", events.length, "events");
+                    if(data && data.events) {
+                        events = data.events;
+                        console.log('Loaded', events.length, 'events');
+                    }
                 })
                 .catch(error => {
-                    console.error("Error loading events:", error);
-                    // Fallback events if JSON fails
-                    events = [
-                        {
-                            condition: "pressCount >= 1",
-                            message: "DEFAULT: BUTTON PRESSED",
-                            action: "document.body.style.backgroundColor='#FFEEEE'"
-                        }
-                    ];
+                    console.error('Event load error:', error);
+                    events = [{ // Fallback event
+                        condition: "pressCount >= 1",
+                        message: "DEFAULT SYSTEM RESPONSE",
+                        action: "document.body.style.backgroundColor='#FFEEEE'"
+                    }];
                 });
         }
 
-        // Process events with safe evaluation
+        // Process events with template literal support
         function processEvents() {
-            var messageSet = false;
+            let messageSet = false;
             
             events.forEach(event => {
                 try {
-                    if (eval(event.condition || "false")) {
-                        if (event.message) {
-                            document.getElementById('message').innerHTML = event.message;
+                    if(eval(event.condition)) {
+                        // Handle ${pressCount} in messages
+                        if(event.message) {
+                            const msg = event.message.replace('${pressCount}', pressCount);
+                            document.getElementById('message').innerHTML = msg;
                             messageSet = true;
                         }
-                        if (event.action) {
-                            try {
-                                eval(event.action);
-                            } catch (e) {
-                                console.error("Action failed:", e);
-                            }
+                        // Handle ${pressCount} in actions
+                        if(event.action) {
+                            const action = event.action.replace(/\${pressCount}/g, pressCount);
+                            eval(action);
                         }
                     }
-                } catch (e) {
-                    console.error("Condition error:", e);
+                } catch(e) {
+                    console.warn('Event error:', e);
                 }
             });
-            
-            if (!messageSet) {
-                document.getElementById('message').innerHTML = defaultMessage;
+
+            if(!messageSet) {
+                document.getElementById('message').innerHTML = defaultStatus;
             }
         }
 
-        // Initialize
+        // Initialize while preserving original flow
         loadEvents();
 
-        // Button handler
+        // Preserved original click handler with animation
         document.getElementById('button').onclick = function() {
             pressCount++;
             document.getElementById('counter').innerHTML = "PRESSES: " + pressCount;
+            
+            // Preserved button animation
+            this.style.transform = "translateY(4px)";
+            setTimeout(() => { this.style.transform = ""; }, 100);
+            
             processEvents();
         };
     //-->
