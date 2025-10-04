@@ -72,6 +72,7 @@
         var pressCount = 0;
         var events = [];
         var defaultStatus = "STATUS: NOMINAL";
+        var rebuilding = false; // Add this at the top
 
         // Load events with error protection
         function loadEvents() {
@@ -98,6 +99,8 @@
 
         // Process events with template literal support
         function processEvents() {
+            if (rebuilding) return; // Skip events while rebuilding
+
             let messageSet = false;
             events.forEach(event => {
                 try {
@@ -149,6 +152,8 @@
 
         // Restart game function
         function restartGame() {
+            rebuilding = true; // Set flag
+
             // Step 1: Clear everything
             document.body.innerHTML = `<div id="container"></div>`;
             const container = document.getElementById('container');
@@ -231,6 +236,7 @@
             // Step 8: Reload events
             setTimeout(() => {
                 loadEvents();
+                rebuilding = false; // Clear flag, events can run again
             }, 2600);
         }
 
