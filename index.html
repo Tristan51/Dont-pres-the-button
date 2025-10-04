@@ -139,6 +139,30 @@
             
             processEvents();
         };
+
+        // Restart game function
+        function restartGame() {
+            document.body.innerHTML = `
+                <div id="container">
+                    <h1><blink>⚠️ DANGER ⚠️</blink></h1>
+                    <div id="counter" class="counter">PRESSES: 0</div>
+                    <div id="button"></div>
+                    <div id="message" class="message">STATUS: NOMINAL</div>
+                </div>
+            `;
+            pressCount = 0;
+            loadEvents();
+            document.getElementById('button').onclick = function() {
+                pressCount++;
+                document.getElementById('counter').innerHTML = "PRESSES: " + pressCount;
+                this.style.transform = "translateY(4px)";
+                setTimeout(() => { this.style.transform = ""; }, 100);
+                processEvents();
+            };
+        }
+
+        // Make restartGame globally accessible for event actions
+        window.restartGame = restartGame;
     //-->
     </script>
 </body>
