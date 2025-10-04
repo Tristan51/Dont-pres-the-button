@@ -82,8 +82,8 @@
     },
     {
       "condition": "pressCount === 100",
-      "message": "One hundred. GAME OVER. You win... nothing. (Click to restart)",
-      "action": "document.body.innerHTML='<h1 id=\"gameover\" style=\"color:red;text-align:center;margin-top:40vh;font-size:3em;cursor:pointer\">GAME OVER<br><span style=\"font-size:0.5em\">(Click here to restart)</span></h1>'"
+      "message": "One hundred. GAME OVER. You win... nothing.",
+      "action": "document.body.innerHTML='<div style=\"position:relative;\"><h1 id=\"gameover\" style=\"color:red;text-align:center;margin-top:40vh;font-size:3em;\">GAME OVER<br><span style=\"font-size:0.5em\">(Click to restart)</span></h1><button id=\"restartBtn\" style=\"position:absolute;top:0;left:0;width:100vw;height:100vh;opacity:0;cursor:pointer;border:none;background:none;\"></button></div>'; setTimeout(()=>{document.getElementById('restartBtn').onclick=function(){restartGame()};},100);"
     },
     {
       "condition": "pressCount === 111",
