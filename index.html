@@ -73,6 +73,8 @@
         var events = [];
         var defaultStatus = "STATUS: NOMINAL";
         var rebuilding = false; // Add this at the top
+        var clickDelay = true;
+        var lastClick = 0;
 
         // Load events with error protection
         function loadEvents() {
@@ -138,15 +140,23 @@
         // Initialize while preserving original flow
         loadEvents();
 
-        // Preserved original click handler with animation
+        // Console command to disable delay
+        window.cdOFF = function() {
+            clickDelay = false;
+            console.log("Click delay OFF");
+        };
+
+        // Replace button click handler:
         document.getElementById('button').onclick = function() {
+            if (clickDelay) {
+                let now = Date.now();
+                if (now - lastClick < 500) return; // 2 clicks per second
+                lastClick = now;
+            }
             pressCount++;
             document.getElementById('counter').innerHTML = "PRESSES: " + pressCount;
-            
-            // Preserved button animation
             this.style.transform = "translateY(4px)";
             setTimeout(() => { this.style.transform = ""; }, 100);
-            
             processEvents();
         };
 
