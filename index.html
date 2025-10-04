@@ -237,6 +237,20 @@
             setTimeout(() => {
                 loadEvents();
                 rebuilding = false; // Clear flag, events can run again
+
+                // Re-attach button click handler
+                const btn = document.getElementById('button');
+                if (btn) {
+                    btn.onclick = function() {
+                        pressCount++;
+                        if (document.getElementById('counter')) {
+                            document.getElementById('counter').innerHTML = "PRESSES: " + pressCount;
+                        }
+                        this.style.transform = "translateY(4px)";
+                        setTimeout(() => { this.style.transform = ""; }, 100);
+                        processEvents();
+                    };
+                }
             }, 2600);
         }
 
