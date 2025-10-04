@@ -149,23 +149,89 @@
 
         // Restart game function
         function restartGame() {
-            document.body.innerHTML = `
-                <div id="container">
-                    <h1><blink>⚠️ DANGER ⚠️</blink></h1>
-                    <div id="counter" class="counter">PRESSES: 0</div>
-                    <div id="button"></div>
-                    <div id="message" class="message">STATUS: NOMINAL</div>
-                </div>
-            `;
+            // Step 1: Clear everything
+            document.body.innerHTML = `<div id="container"></div>`;
+            const container = document.getElementById('container');
             pressCount = 0;
-            loadEvents();
-            document.getElementById('button').onclick = function() {
-                pressCount++;
-                document.getElementById('counter').innerHTML = "PRESSES: " + pressCount;
-                this.style.transform = "translateY(4px)";
-                setTimeout(() => { this.style.transform = ""; }, 100);
-                processEvents();
-            };
+
+            // Step 2: Add button first
+            setTimeout(() => {
+                const btn = document.createElement('div');
+                btn.id = 'button';
+                btn.style.width = '150px';
+                btn.style.height = '150px';
+                btn.style.backgroundColor = '#FF0000';
+                btn.style.margin = '20px auto';
+                btn.style.border = '4px outset #880000';
+                btn.style.cursor = 'pointer';
+                btn.style.display = 'block';
+                btn.style.transition = 'all 0.1s ease';
+                btn.style.boxShadow = '0 5px 0 #CC0000';
+                btn.style.position = 'relative';
+                container.appendChild(btn);
+
+                btn.onclick = function() {
+                    pressCount++;
+                    if (document.getElementById('counter')) {
+                        document.getElementById('counter').innerHTML = "PRESSES: " + pressCount;
+                    }
+                    this.style.transform = "translateY(4px)";
+                    setTimeout(() => { this.style.transform = ""; }, 100);
+                    processEvents();
+                };
+            }, 400);
+
+            // Step 3: Add counter
+            setTimeout(() => {
+                const counter = document.createElement('div');
+                counter.id = 'counter';
+                counter.className = 'counter';
+                counter.innerHTML = "PRESSES: 0";
+                container.appendChild(counter);
+            }, 800);
+
+            // Step 4: Add message
+            setTimeout(() => {
+                const message = document.createElement('div');
+                message.id = 'message';
+                message.className = 'message';
+                message.innerHTML = "STATUS: NOMINAL";
+                container.appendChild(message);
+            }, 1200);
+
+            // Step 5: Add knob (hidden)
+            setTimeout(() => {
+                const knob = document.createElement('div');
+                knob.id = 'knob';
+                knob.style.display = 'none';
+                container.appendChild(knob);
+                knob.onclick = function() {
+                    knob.style.transform = 'rotate(' + (Math.random()*360) + 'deg)';
+                    if (document.getElementById('message')) {
+                        document.getElementById('message').innerHTML = "You turned the knob. Satisfied?";
+                    }
+                };
+            }, 1600);
+
+            // Step 6: Add button body (hidden)
+            setTimeout(() => {
+                const body = document.createElement('div');
+                body.id = 'button-body';
+                body.style.display = 'none';
+                container.appendChild(body);
+            }, 2000);
+
+            // Step 7: Add title
+            setTimeout(() => {
+                const title = document.createElement('h1');
+                title.innerHTML = "<blink>⚠️ DANGER ⚠️</blink>";
+                container.insertBefore(title, container.firstChild);
+            }, 2400);
+
+            // Step 8: Reload events
+            setTimeout(() => {
+                loadEvents();
+            }, 2600);
         }
 
         // Make restartGame globally accessible for event actions
