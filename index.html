@@ -99,28 +99,35 @@
         // Process events with template literal support
         function processEvents() {
             let messageSet = false;
-            
             events.forEach(event => {
                 try {
-                    if(eval(event.condition)) {
-                        // Handle ${pressCount} in messages
-                        if(event.message) {
+                    if (eval(event.condition)) {
+                        if (event.message && document.getElementById('message')) {
                             const msg = event.message.replace('${pressCount}', pressCount);
                             document.getElementById('message').innerHTML = msg;
                             messageSet = true;
                         }
-                        // Handle ${pressCount} in actions
-                        if(event.action) {
-                            const action = event.action.replace(/\${pressCount}/g, pressCount);
-                            eval(action);
+                        // Only run action if all referenced elements exist
+                        if (event.action) {
+                            // Simple check for common elements
+                            let safe = true;
+                            if (event.action.includes("getElementById('button')") && !document.getElementById('button')) safe = false;
+                            if (event.action.includes("getElementById('counter')") && !document.getElementById('counter')) safe = false;
+                            if (event.action.includes("getElementById('message')") && !document.getElementById('message')) safe = false;
+                            if (event.action.includes("getElementById('knob')") && !document.getElementById('knob')) safe = false;
+                            if (event.action.includes("getElementById('button-body')") && !document.getElementById('button-body')) safe = false;
+                            if (safe) {
+                                const action = event.action.replace(/\${pressCount}/g, pressCount);
+                                eval(action);
+                            }
                         }
                     }
                 } catch(e) {
-                    console.warn('Event error:', e);
+                    console.error("Event error:", e);
                 }
             });
 
-            if(!messageSet) {
+            if (!messageSet && document.getElementById('message')) {
                 document.getElementById('message').innerHTML = defaultStatus;
             }
         }
