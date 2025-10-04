@@ -82,8 +82,8 @@
     },
     {
       "condition": "pressCount === 100",
-      "message": "One hundred. GAME OVER. You win... nothing.",
-      "action": "document.body.innerHTML='<div style=\"position:relative;\"><h1 id=\"gameover\" style=\"color:red;text-align:center;margin-top:40vh;font-size:3em;\">GAME OVER<br><span style=\"font-size:0.5em\">(Click to restart)</span></h1><button id=\"restartBtn\" style=\"position:absolute;top:0;left:0;width:100vw;height:100vh;opacity:0;cursor:pointer;border:none;background:none;\"></button></div>'; setTimeout(()=>{document.getElementById('restartBtn').onclick=function(){restartGame()};},100);"
+      "message": "100 presses! You have unlocked... THE BIG SURPRISE!",
+      "action": "let surprise=document.createElement('div');surprise.id='big-surprise';surprise.style.position='fixed';surprise.style.top='0';surprise.style.left='0';surprise.style.width='100vw';surprise.style.height='100vh';surprise.style.background='rgba(0,0,0,0.85)';surprise.style.zIndex='9999';surprise.style.display='flex';surprise.style.flexDirection='column';surprise.style.justifyContent='center';surprise.style.alignItems='center';surprise.innerHTML='<h1 style=\"color:yellow;font-size:5em;\">🎉 SURPRISE! 🎉</h1><p style=\"color:white;font-size:2em;\">You pressed the button 100 times.<br>Now go touch grass.</p><button style=\"font-size:2em;padding:1em 2em;margin-top:2em;cursor:pointer;\">Close</button>';document.body.appendChild(surprise);surprise.querySelector('button').onclick=function(){document.body.removeChild(surprise);};"
     },
     {
       "condition": "pressCount === 111",
