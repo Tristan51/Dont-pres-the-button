@@ -2,92 +2,142 @@
   "events": [
     {
       "condition": "pressCount === 1",
-      "message": "FIRST PRESS! SYSTEM AWAKENING",
-      "action": "document.body.style.backgroundColor='#FFEEEE'"
+      "message": "Seriously? You just had to click it.",
+      "action": "document.body.style.backgroundColor='#FFE4E1'"
     },
     {
       "condition": "pressCount === 2",
-      "message": "SECOND PRESS! PROTOCOLS ENGAGED",
-      "action": "document.getElementById('button').style.border='4px double red'"
+      "message": "Twice? Maybe you missed the warning.",
+      "action": "document.getElementById('button').style.border='4px dashed orange'"
     },
     {
       "condition": "pressCount === 3",
-      "message": "THIRD PRESS! ENERGY BUILDING",
-      "action": "document.getElementById('message').style.textDecoration='blink'"
+      "message": "Three clicks. Is this a test of patience or intelligence?",
+      "action": "document.getElementById('message').style.fontStyle='italic'"
     },
     {
       "condition": "pressCount === 4",
-      "message": "FOURTH PRESS! SYSTEMS STRAINING",
+      "message": "Four. You’re just ignoring me now, aren’t you?",
       "action": "document.getElementById('counter').style.fontWeight='bold'"
     },
     {
       "condition": "pressCount === 5",
-      "message": "FIFTH PRESS! CONTAINMENT WEAKENS",
-      "action": "document.getElementById('button').style.boxShadow='0 0 10px red'"
+      "message": "Five presses. Button is considering a restraining order.",
+      "action": "document.getElementById('button').style.boxShadow='0 0 10px orange'"
     },
     {
       "condition": "pressCount === 10",
-      "message": "TENTH PRESS! RELEASE THE KRAKEN!",
+      "message": "Ten presses. You must be really bored.",
       "action": "document.body.classList.add('screen-shake');setTimeout(()=>document.body.classList.remove('screen-shake'),1000)"
     },
     {
       "condition": "pressCount === 15",
-      "message": "PHASE 2 ACTIVATED!",
-      "action": "document.body.style.background='linear-gradient(black, #330000)'"
+      "message": "Fifteen. Are you expecting a medal?",
+      "action": "document.body.style.background='linear-gradient(gray, #330000)'"
     },
     {
       "condition": "pressCount === 20",
-      "message": "MATRIX BREACHED! (${pressCount})",
+      "message": "Twenty. Matrix called, it wants its button back.",
       "action": "document.getElementById('button').style.transform='rotate(180deg)'"
     },
     {
       "condition": "pressCount === 25",
-      "message": "QUANTUM FLUCTUATIONS DETECTED",
+      "message": "Twenty-five. Quantum physicists are confused.",
       "action": "document.body.style.animation='vortex 2s infinite'"
     },
     {
       "condition": "pressCount === 30",
-      "message": "TIME PARADOX IMMINENT",
+      "message": "Thirty. Time travel not included.",
       "action": "document.getElementById('button').style.animation='hyperspace 1s infinite'"
     },
     {
       "condition": "pressCount === 40",
-      "message": "DIMENSIONAL TEAR DETECTED",
+      "message": "Forty. Reality is slightly disappointed.",
       "action": "document.body.style.filter='hue-rotate(180deg)'"
     },
     {
       "condition": "pressCount === 50",
-      "message": "SINGULARITY FORMING",
+      "message": "Fifty. Button is now officially unimpressed.",
       "action": "document.body.style.transform='scale(0.9)'"
     },
     {
       "condition": "pressCount === 60",
-      "message": "REALITY UNRAVELING",
+      "message": "Sixty. Button needs a vacation.",
       "action": "document.getElementById('button').style.display='none';setTimeout(()=>document.getElementById('button').style.display='block',500)"
     },
     {
       "condition": "pressCount === 70",
-      "message": "COSMIC HORROR AWAKENS",
+      "message": "Seventy. Cosmic horror is mildly amused.",
       "action": "document.body.style.backgroundImage='repeating-linear-gradient(45deg, black, black 10px, #f00 10px, #f00 20px)'"
     },
     {
       "condition": "pressCount === 80",
-      "message": "FINAL WARNING",
+      "message": "Eighty. Final warning. Or is it?",
       "action": "document.body.style.color='white';document.body.style.backgroundColor='black'"
     },
     {
       "condition": "pressCount === 90",
-      "message": "POINT OF NO RETURN",
+      "message": "Ninety. Button now round. Like your patience.",
       "action": "document.getElementById('button').style.borderRadius='50%'"
     },
     {
       "condition": "pressCount === 100",
-      "message": "SYSTEM DESTROYED",
-      "action": "document.body.innerHTML='<h1 style=\"color:red;text-align:center;margin-top:40vh;font-size:3em\">GAME OVER</h1>'"
+      "message": "One hundred. GAME OVER. You win... nothing.",
+      "action": "document.body.innerHTML='<div style=\"position:relative;\"><h1 id=\"gameover\" style=\"color:red;text-align:center;margin-top:40vh;font-size:3em;\">GAME OVER<br><span style=\"font-size:0.5em\">(Click to restart)</span></h1><button id=\"restartBtn\" style=\"position:absolute;top:0;left:0;width:100vw;height:100vh;opacity:0;cursor:pointer;border:none;background:none;\"></button></div>'; setTimeout(()=>{document.getElementById('restartBtn').onclick=function(){restartGame()};},100);"
+    },
+    {
+      "condition": "pressCount === 111",
+      "message": "111. Is this a secret code? Nope.",
+      "action": "document.body.style.backgroundColor='#111111'"
+    },
+    {
+      "condition": "pressCount === 123",
+      "message": "123. Easy as 1-2-3.",
+      "action": "document.getElementById('counter').style.letterSpacing='5px'"
+    },
+    {
+      "condition": "pressCount === 150",
+      "message": "150. Button is now existential.",
+      "action": "document.getElementById('message').innerHTML='Is this real life?'"
+    },
+    {
+      "condition": "pressCount === 175",
+      "message": "175. You know what? Here, have a knob to turn.",
+      "action": "document.getElementById('knob').style.display='block';document.getElementById('message').innerHTML='Try turning the knob. Maybe it does something.'"
+    },
+    {
+      "condition": "pressCount === 200",
+      "message": "200. Button has evolved legs and is trying to escape.",
+      "action": "document.getElementById('button-body').style.display='block';document.getElementById('button-body').style.animation='moveButton 2s infinite';document.getElementById('message').innerHTML='The button has evolved. Now it can move!'"
+    },
+    {
+      "condition": "pressCount === 404",
+      "message": "404. Button not found.",
+      "action": "document.getElementById('button').style.display='none';setTimeout(()=>document.getElementById('button').style.display='block',404)"
+    },
+    {
+      "condition": "pressCount === 500",
+      "message": "500. Internal Server Error. Button overheated.",
+      "action": "document.body.innerHTML='<h1 style=\"color:red;text-align:center;margin-top:40vh;font-size:3em\">500 ERROR<br>Button Overheated</h1>'"
+    },
+    {
+      "condition": "pressCount === 666",
+      "message": "666. Spooky. The button is now haunted.",
+      "action": "document.body.style.backgroundColor='darkred'"
+    },
+    {
+      "condition": "pressCount === 777",
+      "message": "777. Jackpot! (Just kidding)",
+      "action": "document.getElementById('counter').style.color='gold'"
+    },
+    {
+      "condition": "pressCount === 1000",
+      "message": "1000. You have reached peak button. Now what?",
+      "action": "document.body.innerHTML='<h1 style=\"color:lime;text-align:center;margin-top:40vh;font-size:3em\">CONGRATULATIONS<br>You pressed a button 1000 times.<br>Now what?</h1>'"
     },
     {
       "condition": "pressCount % 10 === 0",
-      "message": "MILESTONE: ${pressCount} PRESSES!",
+      "message": "Milestone: ${pressCount} presses. Still going?",
       "action": "new Audio('https://assets.mixkit.co/sfx/preview/mixkit-arcade-game-jump-coin-216.mp3').play()"
     },
     {
@@ -99,9 +149,34 @@
       "action": "document.body.style.backgroundColor='hsl(${pressCount*3 % 360}, 50%, 50%)'"
     },
     {
-      "condition": "Math.random() < 0.2",
-      "message": "RANDOM ANOMALY DETECTED!",
+      "condition": "pressCount % 13 === 0",
+      "message": "Unlucky number ${pressCount}.",
+      "action": "document.getElementById('message').style.color='purple'"
+    },
+    {
+      "condition": "pressCount % 42 === 0",
+      "message": "The answer to everything: ${pressCount}.",
+      "action": "document.getElementById('counter').style.fontSize='2em'"
+    },
+    {
+      "condition": "pressCount % 69 === 0",
+      "message": "Nice.",
+      "action": "document.getElementById('message').style.fontWeight='bold'"
+    },
+    {
+      "condition": "pressCount % 100 === 0",
+      "message": "Centurion! ${pressCount} presses.",
+      "action": "document.body.style.border='10px solid lime'"
+    },
+    {
+      "condition": "Math.random() < 0.1",
+      "message": "Random anomaly detected. Or not.",
       "action": "document.getElementById('button').style.transform='rotate(${Math.random()*360}deg)'"
+    },
+    {
+      "condition": "pressCount > 1000",
+      "message": "You’re still pressing? Button is speechless.",
+      "action": "document.body.style.backgroundColor='pink'"
     }
   ]
 }
