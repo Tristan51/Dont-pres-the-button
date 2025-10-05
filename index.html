@@ -101,8 +101,6 @@
 
         // Process events with template literal support
         function processEvents() {
-            if (rebuilding) return; // Skip events while rebuilding
-
             let messageSet = false;
             events.forEach(event => {
                 try {
@@ -112,19 +110,9 @@
                             document.getElementById('message').innerHTML = msg;
                             messageSet = true;
                         }
-                        // Only run action if all referenced elements exist
                         if (event.action) {
-                            // Simple check for common elements
-                            let safe = true;
-                            if (event.action.includes("getElementById('button')") && !document.getElementById('button')) safe = false;
-                            if (event.action.includes("getElementById('counter')") && !document.getElementById('counter')) safe = false;
-                            if (event.action.includes("getElementById('message')") && !document.getElementById('message')) safe = false;
-                            if (event.action.includes("getElementById('knob')") && !document.getElementById('knob')) safe = false;
-                            if (event.action.includes("getElementById('button-body')") && !document.getElementById('button-body')) safe = false;
-                            if (safe) {
-                                const action = event.action.replace(/\${pressCount}/g, pressCount);
-                                eval(action);
-                            }
+                            const action = event.action.replace(/\${pressCount}/g, pressCount);
+                            eval(action);
                         }
                     }
                 } catch(e) {
@@ -132,8 +120,9 @@
                 }
             });
 
+            // Only show version if no other message was set
             if (!messageSet && document.getElementById('message')) {
-                document.getElementById('message').innerHTML = defaultStatus;
+                document.getElementById('message').innerHTML = "v1.2.0 - Storyline & click delay enabled";
             }
         }
 
