@@ -255,6 +255,42 @@
 
         // Make restartGame globally accessible for event actions
         window.restartGame = restartGame;
+
+        function showOverloadGUI() {
+            if (document.getElementById('overload-gui')) return; // Prevent duplicates
+            let gui = document.createElement('div');
+            gui.id = 'overload-gui';
+            gui.style.position = 'fixed';
+            gui.style.top = '0';
+            gui.style.left = '0';
+            gui.style.width = '100vw';
+            gui.style.height = '100vh';
+            gui.style.background = 'rgba(0,0,0,0.85)';
+            gui.style.zIndex = '9999';
+            gui.style.display = 'flex';
+            gui.style.flexDirection = 'column';
+            gui.style.justifyContent = 'flex-start';
+            gui.style.alignItems = 'center';
+            gui.style.padding = '40px 0';
+            gui.innerHTML =
+                '<h1 style="color:lime;font-size:4em;">BUTTON OVERLOAD!</h1>' +
+                '<div style="margin:20px 0;">' +
+                    '<button style="font-size:2em;padding:0.5em 2em;margin:0 1em;" onclick="alert(\'You pressed the extra button!\')">Extra Button</button>' +
+                    '<button style="font-size:2em;padding:0.5em 2em;margin:0 1em;" onclick="alert(\'You pressed ANOTHER button!\')">Another Button</button>' +
+                '</div>' +
+                '<div style="margin:20px 0;">' +
+                    '<label style="color:white;font-size:1.5em;">Slider: <input type="range" min="0" max="100" value="50" style="width:200px;" oninput="document.getElementById(\'slider-value\').innerText=this.value" /></label> ' +
+                    '<span id="slider-value" style="color:yellow;font-size:1.5em;">50</span>' +
+                '</div>' +
+                '<div style="background:#222;padding:20px;border-radius:10px;width:400px;max-width:90vw;margin:20px 0;">' +
+                    '<div style="color:#0ff;font-size:1.2em;margin-bottom:10px;">Fake Chat:</div>' +
+                    '<div style="color:#fff;font-size:1em;margin-bottom:5px;">ButtonBot: Wow, you really like clicking.</div>' +
+                    '<div style="color:#fff;font-size:1em;margin-bottom:5px;">You: I can\'t stop now!</div>' +
+                    '<div style="color:#fff;font-size:1em;margin-bottom:5px;">ButtonBot: Try the slider, it\'s fun.</div>' +
+                '</div>' +
+                '<button style="font-size:2em;padding:1em 2em;margin-top:2em;cursor:pointer;" onclick="document.getElementById(\'overload-gui\').remove()">Close Overload</button>';
+            document.body.appendChild(gui);
+        }
     //-->
     </script>
 </body>
