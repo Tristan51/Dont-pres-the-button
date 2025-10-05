@@ -151,8 +151,8 @@
       "action": ""
     },
     {
-      "condition": "true",
-      "message": "v1.2.0 - Storyline & click delay enabled",
+      "condition": "false",
+      "message": "v1.2.1 - Storyline & click delay enabled",
       "action": ""
     }
   ]
