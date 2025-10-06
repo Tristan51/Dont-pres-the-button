@@ -256,8 +256,12 @@
         // Make restartGame globally accessible for event actions
         window.restartGame = restartGame;
 
+        var clickerScore = 0;
+        var overloadActive = false;
+
         function showOverloadGUI() {
             if (document.getElementById('overload-panel')) return; // Prevent duplicates
+            overloadActive = true;
 
             // Create panel
             let panel = document.createElement('div');
@@ -275,9 +279,6 @@
             panel.style.flexDirection = 'column';
             panel.style.alignItems = 'center';
 
-            // Clicker game state
-            let clickerScore = 0;
-
             // Title
             let title = document.createElement('h2');
             title.innerText = "BUTTON OVERLOAD MODE";
@@ -294,48 +295,6 @@
             scoreDiv.style.color = '#000';
             scoreDiv.innerText = "Clicker Score: 0";
             panel.appendChild(scoreDiv);
-
-            // Buttons
-            let btnRow = document.createElement('div');
-            btnRow.style.display = 'flex';
-            btnRow.style.gap = '20px';
-            btnRow.style.marginBottom = '16px';
-
-            let btn1 = document.createElement('button');
-            btn1.innerText = "Extra Button";
-            btn1.style.fontSize = "1.2em";
-            btn1.style.padding = "0.5em 2em";
-            btn1.style.background = "#FF0000";
-            btn1.style.color = "#fff";
-            btn1.style.border = "4px outset #880000";
-            btn1.style.fontFamily = '"Times New Roman", Times, serif';
-            btn1.style.boxShadow = "0 5px 0 #CC0000";
-            btn1.style.cursor = "pointer";
-            btn1.onclick = function() {
-                clickerScore += 1;
-                scoreDiv.innerText = "Clicker Score: " + clickerScore;
-                updateChat();
-            };
-            btnRow.appendChild(btn1);
-
-            let btn2 = document.createElement('button');
-            btn2.innerText = "Another Button";
-            btn2.style.fontSize = "1.2em";
-            btn2.style.padding = "0.5em 2em";
-            btn2.style.background = "#FF0000";
-            btn2.style.color = "#fff";
-            btn2.style.border = "4px outset #880000";
-            btn2.style.fontFamily = '"Times New Roman", Times, serif';
-            btn2.style.boxShadow = "0 5px 0 #CC0000";
-            btn2.style.cursor = "pointer";
-            btn2.onclick = function() {
-                clickerScore += 5;
-                scoreDiv.innerText = "Clicker Score: " + clickerScore;
-                updateChat();
-            };
-            btnRow.appendChild(btn2);
-
-            panel.appendChild(btnRow);
 
             // Slider
             let sliderRow = document.createElement('div');
@@ -401,6 +360,26 @@
 
             // Add panel to container
             document.getElementById('container').appendChild(panel);
+
+            // Update main button to increment clickerScore
+            var mainBtn = document.getElementById('button');
+            mainBtn.onclick = function() {
+                if (clickDelay) {
+                    let now = Date.now();
+                    if (now - lastClick < 500) return;
+                    lastClick = now;
+                }
+                pressCount++;
+                document.getElementById('counter').innerHTML = "PRESSES: " + pressCount;
+                if (overloadActive) {
+                    clickerScore += 1;
+                    scoreDiv.innerText = "Clicker Score: " + clickerScore;
+                    updateChat();
+                }
+                this.style.transform = "translateY(4px)";
+                setTimeout(() => { this.style.transform = ""; }, 100);
+                processEvents();
+            };
         }
     //-->
     </script>
