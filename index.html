@@ -257,39 +257,150 @@
         window.restartGame = restartGame;
 
         function showOverloadGUI() {
-            if (document.getElementById('overload-gui')) return; // Prevent duplicates
-            let gui = document.createElement('div');
-            gui.id = 'overload-gui';
-            gui.style.position = 'fixed';
-            gui.style.top = '0';
-            gui.style.left = '0';
-            gui.style.width = '100vw';
-            gui.style.height = '100vh';
-            gui.style.background = 'rgba(0,0,0,0.85)';
-            gui.style.zIndex = '9999';
-            gui.style.display = 'flex';
-            gui.style.flexDirection = 'column';
-            gui.style.justifyContent = 'flex-start';
-            gui.style.alignItems = 'center';
-            gui.style.padding = '40px 0';
-            gui.innerHTML =
-                '<h1 style="color:lime;font-size:4em;">BUTTON OVERLOAD!</h1>' +
-                '<div style="margin:20px 0;">' +
-                    '<button style="font-size:2em;padding:0.5em 2em;margin:0 1em;" onclick="alert(\'You pressed the extra button!\')">Extra Button</button>' +
-                    '<button style="font-size:2em;padding:0.5em 2em;margin:0 1em;" onclick="alert(\'You pressed ANOTHER button!\')">Another Button</button>' +
-                '</div>' +
-                '<div style="margin:20px 0;">' +
-                    '<label style="color:white;font-size:1.5em;">Slider: <input type="range" min="0" max="100" value="50" style="width:200px;" oninput="document.getElementById(\'slider-value\').innerText=this.value" /></label> ' +
-                    '<span id="slider-value" style="color:yellow;font-size:1.5em;">50</span>' +
-                '</div>' +
-                '<div style="background:#222;padding:20px;border-radius:10px;width:400px;max-width:90vw;margin:20px 0;">' +
-                    '<div style="color:#0ff;font-size:1.2em;margin-bottom:10px;">Fake Chat:</div>' +
-                    '<div style="color:#fff;font-size:1em;margin-bottom:5px;">ButtonBot: Wow, you really like clicking.</div>' +
-                    '<div style="color:#fff;font-size:1em;margin-bottom:5px;">You: I can\'t stop now!</div>' +
-                    '<div style="color:#fff;font-size:1em;margin-bottom:5px;">ButtonBot: Try the slider, it\'s fun.</div>' +
-                '</div>' +
-                '<button style="font-size:2em;padding:1em 2em;margin-top:2em;cursor:pointer;" onclick="document.getElementById(\'overload-gui\').remove()">Close Overload</button>';
-            document.body.appendChild(gui);
+            if (document.getElementById('overload-panel')) return; // Prevent duplicates
+
+            // Create panel
+            let panel = document.createElement('div');
+            panel.id = 'overload-panel';
+            panel.style.background = '#F0F0F0';
+            panel.style.border = '3px double #000';
+            panel.style.padding = '20px';
+            panel.style.margin = '30px auto';
+            panel.style.width = '500px';
+            panel.style.maxWidth = '95vw';
+            panel.style.borderRadius = '16px';
+            panel.style.boxShadow = '0 8px 24px #8888';
+            panel.style.fontFamily = '"Times New Roman", Times, serif';
+            panel.style.display = 'flex';
+            panel.style.flexDirection = 'column';
+            panel.style.alignItems = 'center';
+
+            // Clicker game state
+            let clickerScore = 0;
+
+            // Title
+            let title = document.createElement('h2');
+            title.innerText = "BUTTON OVERLOAD MODE";
+            title.style.color = "#FF0000";
+            title.style.textShadow = "2px 2px #880000";
+            title.style.marginBottom = "10px";
+            panel.appendChild(title);
+
+            // Clicker counter
+            let scoreDiv = document.createElement('div');
+            scoreDiv.id = 'clicker-score';
+            scoreDiv.style.fontSize = '1.5em';
+            scoreDiv.style.marginBottom = '16px';
+            scoreDiv.style.color = '#000';
+            scoreDiv.innerText = "Clicker Score: 0";
+            panel.appendChild(scoreDiv);
+
+            // Buttons
+            let btnRow = document.createElement('div');
+            btnRow.style.display = 'flex';
+            btnRow.style.gap = '20px';
+            btnRow.style.marginBottom = '16px';
+
+            let btn1 = document.createElement('button');
+            btn1.innerText = "Extra Button";
+            btn1.style.fontSize = "1.2em";
+            btn1.style.padding = "0.5em 2em";
+            btn1.style.background = "#FF0000";
+            btn1.style.color = "#fff";
+            btn1.style.border = "4px outset #880000";
+            btn1.style.fontFamily = '"Times New Roman", Times, serif';
+            btn1.style.boxShadow = "0 5px 0 #CC0000";
+            btn1.style.cursor = "pointer";
+            btn1.onclick = function() {
+                clickerScore += 1;
+                scoreDiv.innerText = "Clicker Score: " + clickerScore;
+                updateChat();
+            };
+            btnRow.appendChild(btn1);
+
+            let btn2 = document.createElement('button');
+            btn2.innerText = "Another Button";
+            btn2.style.fontSize = "1.2em";
+            btn2.style.padding = "0.5em 2em";
+            btn2.style.background = "#FF0000";
+            btn2.style.color = "#fff";
+            btn2.style.border = "4px outset #880000";
+            btn2.style.fontFamily = '"Times New Roman", Times, serif';
+            btn2.style.boxShadow = "0 5px 0 #CC0000";
+            btn2.style.cursor = "pointer";
+            btn2.onclick = function() {
+                clickerScore += 5;
+                scoreDiv.innerText = "Clicker Score: " + clickerScore;
+                updateChat();
+            };
+            btnRow.appendChild(btn2);
+
+            panel.appendChild(btnRow);
+
+            // Slider
+            let sliderRow = document.createElement('div');
+            sliderRow.style.marginBottom = '16px';
+            let sliderLabel = document.createElement('label');
+            sliderLabel.innerText = "Slider: ";
+            sliderLabel.style.color = "#000";
+            sliderLabel.style.fontSize = "1.2em";
+            sliderLabel.style.fontFamily = '"Times New Roman", Times, serif';
+
+            let slider = document.createElement('input');
+            slider.type = 'range';
+            slider.min = '0';
+            slider.max = '100';
+            slider.value = '50';
+            slider.style.width = '200px';
+            slider.style.verticalAlign = 'middle';
+            slider.oninput = function() {
+                clickerScore += 2;
+                scoreDiv.innerText = "Clicker Score: " + clickerScore;
+                sliderValue.innerText = slider.value;
+                updateChat();
+            };
+
+            let sliderValue = document.createElement('span');
+            sliderValue.id = 'slider-value';
+            sliderValue.innerText = '50';
+            sliderValue.style.color = "#FF0000";
+            sliderValue.style.fontSize = "1.2em";
+            sliderValue.style.fontFamily = '"Times New Roman", Times, serif';
+            sliderValue.style.marginLeft = "8px";
+
+            sliderLabel.appendChild(slider);
+            sliderRow.appendChild(sliderLabel);
+            sliderRow.appendChild(sliderValue);
+            panel.appendChild(sliderRow);
+
+            // Fake chat
+            let chatBox = document.createElement('div');
+            chatBox.style.background = "#DDDDDD";
+            chatBox.style.padding = "20px";
+            chatBox.style.borderRadius = "10px";
+            chatBox.style.width = "400px";
+            chatBox.style.maxWidth = "90vw";
+            chatBox.style.margin = "20px 0";
+            chatBox.style.border = "2px solid #999";
+            chatBox.style.fontFamily = "Arial, Helvetica, sans-serif";
+            chatBox.id = "overload-chat";
+            panel.appendChild(chatBox);
+
+            function updateChat() {
+                let chat = [
+                    '<div style="color:#FF0000;font-size:1.2em;margin-bottom:10px;font-family:Times New Roman, Times, serif;">Fake Chat:</div>',
+                    '<div style="color:#000;font-size:1em;margin-bottom:5px;">ButtonBot: Wow, you really like clicking.</div>',
+                    '<div style="color:#000;font-size:1em;margin-bottom:5px;">You: My score is ' + clickerScore + '!</div>',
+                    clickerScore > 20 ? '<div style="color:#000;font-size:1em;margin-bottom:5px;">ButtonBot: You\'re unstoppable!</div>' : '',
+                    clickerScore > 50 ? '<div style="color:#000;font-size:1em;margin-bottom:5px;">ButtonBot: Okay, now you\'re just showing off.</div>' : '',
+                    clickerScore > 100 ? '<div style="color:#000;font-size:1em;margin-bottom:5px;">ButtonBot: Is this the endgame?</div>' : ''
+                ].join('');
+                chatBox.innerHTML = chat;
+            }
+            updateChat();
+
+            // Add panel to container
+            document.getElementById('container').appendChild(panel);
         }
     //-->
     </script>
